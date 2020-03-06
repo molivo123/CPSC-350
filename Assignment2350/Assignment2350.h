@@ -1,5 +1,8 @@
 #include <iostream>
 #include <typeinfo>
+#include <fstream>
+#include <random>
+#include <string>
 
 using namespace std;
 
@@ -16,7 +19,7 @@ public:
   int getRandomInput(); //prompt fopr when a random game board is chosen
   float populationDensity();
   bool safeInt(int &output);
-  int GetFileInfo();
+  //int GetFileInfo();
 
   //vars
   int output;
@@ -33,10 +36,6 @@ public:
 
   char *myArrayRow;
   char *myArrayCol;
-
-
-
-
 
 
 };

@@ -32,7 +32,7 @@ char GameOfLife::userInput(){
       break;
     }
     else if(tolower(userResponse1) == 'f'){
-      GetFileInfo();
+      //GetFileInfo();
       validResponse = true;
       break;
     }
@@ -88,28 +88,19 @@ int GameOfLife::getRandomInput(){
     cout << "The population density is: " << populationDenCalc << endl;
     break;
   }
-
 }
 
-int GameOfLife::GetFileInfo(){
+//int GameOfLife::GetFileInfo(){
 
-  cout << "Please enter your file name: " << endl;
-  cin >> fileName;
-  userFile(fileName);
+//  cout << "Please enter your file name: " << endl;
+//  cin >> fileName;
+//  userFile(fileName);
 
-  if(userFile.is_open()){
-    while(userFile.good()){
-      getline(userFile, intLine);
-      
-
-    }
-
-  }
+//  if(userFile.is_open()){
+//    while(userFile.good()){
+//      getline(userFile, intLine);
 
 
-
-
-
-  if(userFile)
-
-}
+//    }
+//  }
+//}
