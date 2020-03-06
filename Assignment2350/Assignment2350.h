@@ -17,9 +17,13 @@ public:
   char userInput(); // ask user random or file
   string inputFile(); // ask for name of inputFile
   int getRandomInput(); //prompt fopr when a random game board is chosen
-  float populationDensity();
   bool safeInt(int &output);
-  //int GetFileInfo();
+  int GetFileInfo();
+  char gameBoundary();
+  void Classic();
+  void Mirror();
+  void Doughnut();
+  bool safeStr(string &outputS);
 
   //vars
   int output;
@@ -32,7 +36,14 @@ public:
   string fileName;
   string textLine;
   int intLine;
+  int intLineRow;
+  int intLineCol;
   ifstream userFile;
+  int counter;
+  char tempChar;
+  string userBoundary;
+  int Xcounter;
+
 
   char *myArrayRow;
   char *myArrayCol;
