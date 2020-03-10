@@ -1,31 +1,54 @@
 #include "Assignment2350.h"
+#include <iostream>
 
-gameBoard::gameBoard(){
+using namespace std;
+
+
+GameBoard::GameBoard(){
   char response;
+  bool userResponse = false;
 
   cout << "Would you like to read from a file ['f'] or have a random gameboard ['r']? " << endl;
   cin>>response;
+  while(userResponse == false){
 
-  if(tolower(response) == 'r'){
-    randomBoard();
-  }
-  else{
-    GetFileInfo();
+    if(tolower(response) == 'r'){
+      getRandomValues();
+      userResponse = true;
+    }
+    else if (tolower(response) == 'f'){
+      getFileValues();
+      userResponse = true;
+    }
+    else{
+      cout << "Invalid input" << endl;
+    }
   }
 
 }
 
 
-gameBoard::~gameBoard(){
+GameBoard::~GameBoard(){
 
 }
 
+bool GameBoard::safeInt(int &output){
+  int temp;
+  cin>>temp;
+  if (cin.fail()) {
+    cin.clear();
+    cin.ignore();
+    return false;
+  }
+  output = temp;
+  return true;
 
-void gameBoard::getRandomValues(){
+}
+
+void GameBoard::getRandomValues(){
   int width = 0;
   int length = 0;
   int popDen = 0;
-  double randNum = 0;
   double randNum = ((double)rand()/(double)RAND_MAX);
 
 
@@ -46,7 +69,7 @@ void gameBoard::getRandomValues(){
 
   }
   cout << "Enter a random number between 1 and 100: " << endl;
-  cin >> PopDen;
+  cin >> popDen;
 
   while (!safeInt(popDen)){
     cout << "You have an error. " << endl;
@@ -70,13 +93,10 @@ void gameBoard::getRandomValues(){
       }
     }
   }
-
-
 }
 
-int gameBoard::getFileValues(){
+void GameBoard::getFileValues(){
   int c = 0;
-  counter = 0;
   int LineRow = 0;
   int LineCol = 0;
   cout << "Please enter your file name: " << endl;
@@ -84,26 +104,20 @@ int gameBoard::getFileValues(){
   userFile.open(fileName);
 
   if(userFile.is_open()){
-    while( getline ( userFile, textLine ) ){
-      int lineLen = textLine.length();
-      if (lineLen == 0) continue;
-      for (int i = 0; i < lineLen; ++i){
-        for(int j= 0; j < ){
-
-        }
-      }
-      cout << textLine << endl;
+    while(getline (userFile, textLine ) ){
+      width+=textLine.length();
+      c++;
     }
-    cout << "Num of X's: "<< xCounter << endl;
-
-    cout << "Rows: "<< intLineRow << endl;
-    cout << "Lines: "<< intLineCol << endl;
-    gameBoundary();
+    length=c;
   }
-
   else{
-    cout << "File could not be opened " << endl;
+    cout << "Cannot find file " << endl;
   }
-  return 0;
+  arr2 = new char *[length];
+  int lineLen = textLine.length();
 
+  for (int i = 0; i < length; ++i){
+    arr2[i] = new char [width];
+  }
+  userFile.close();
 }

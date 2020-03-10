@@ -3,27 +3,26 @@
 #include <fstream>
 #include <random>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
 class GameOfLife{
 public:
   GameOfLife();//default constructor
-  GameOfLife(); // overloaded constructor
-  GameOfLife(string fileInput);
   ~GameOfLife();//deconstructor
 
-
+  int *randomBoard();
+  int *chooseFile();
+  void classic();
   //aux functions
   char userInput(); // ask user random or file
   string inputFile(); // ask for name of inputFile
   int getLength();
   int getWidth();
   int getPopDen();
-  bool safeInt(int &output);
   char gameBoundary();
   char outputSelection();
-  void outputToFile();
   void outputToConsole();
   void pause();
   void enter();
@@ -31,8 +30,8 @@ public:
 
   //vars
   int output;
-  int width;
-  int length;
+  int width=0;
+  int length=0;
   int popDen;
   int maxSize;
   char userResponse1;
@@ -41,27 +40,17 @@ public:
   int randomLength;
   int populationDen;
   double populationDenCalc;
-  string fileName;
-  string textLine;
   int intLine;
   int intLineRow;
   int intLineCol;
-  ifstream userFile;
   int counter;
   char tempChar;
   string userBoundary;
   int xCounter;
   char outputDecision;
   ofstream outputFile;
-  char pausesOrEnter;
   double probOfX;
-
-
-  GameOfLife* gamePtr;
-  int mSize;
-  void (*foo)(int);
-
-  //foo = &getRandomValues;
+  char pausesOrEnter;
 
 
   char *myArrayRow;
@@ -70,20 +59,31 @@ public:
 };
 class GameBoard{
 public:
-  gameBoard();
-  ~gameBoard();
+  GameBoard();
+  ~GameBoard();
 
   void getRandomValues();
-  int getFileValues();
-
+  void getFileValues();
+  bool safeInt(int &output);
+  void outputToFile();
   int width;
+  int probOfX;
   int length;
+  string fileName;
+  string textLine;
+  ifstream userFile;
+  int RandVar;
+  char pausesOrEnter;
+
 
   char ** arr1 = NULL;
+  char ** arr2 = NULL;
+  char ** RandBoard = NULL;
 
 
 };
-
+//created new class for each of the gamemodes
+//idea provided to me by the tutoring center
 class Classic{
 public:
   Classic();
@@ -95,6 +95,7 @@ public:
 
 };
 class Mirror{
+public:
   Mirror();
   ~Mirror();
 
@@ -103,11 +104,11 @@ class Mirror{
 
 };
 class Doughnut{
+public:
   Doughnut();
-  Doughnut();
+  ~Doughnut();
 
   void startDoughnut();
   char ** nextArr = NULL;
-
 
 };
