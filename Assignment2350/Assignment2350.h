@@ -9,26 +9,38 @@ using namespace std;
 class GameOfLife{
 public:
   GameOfLife();//default constructor
-  GameOfLife(int mSize); // overloaded constructor
+  GameOfLife(int width, int length, int popDen); // overloaded constructor
+  GameOfLife(string fileInput);
   ~GameOfLife();//deconstructor
 
 
   //aux functions
   char userInput(); // ask user random or file
   string inputFile(); // ask for name of inputFile
-  int getRandomInput(); //prompt fopr when a random game board is chosen
+  int getLength();
+  int getWidth();
+  int getPopDen();
   bool safeInt(int &output);
   int GetFileInfo();
   char gameBoundary();
   void Classic();
   void Mirror();
   void Doughnut();
-  bool safeStr(string &outputS);
+  char outputSelection();
+  void outputToFile();
+  void outputToConsole();
+  void pause();
+  void enter();
+  void disp();
 
   //vars
   int output;
+  int width;
+  int length;
+  int popDen;
   int maxSize;
   char userResponse1;
+  char userResponse;
   int randomWidth;
   int randomLength;
   int populationDen;
@@ -42,11 +54,21 @@ public:
   int counter;
   char tempChar;
   string userBoundary;
-  int Xcounter;
+  int xCounter;
+  char outputDecision;
+  ofstream outputFile;
+  char pausesOrEnter;
+  double probOfX;
+
+
+  GameOfLife* gamePtr;
+  int mSize;
+  void (*foo)(int);
+
+  //foo = &getRandomValues;
 
 
   char *myArrayRow;
   char *myArrayCol;
-
 
 };
