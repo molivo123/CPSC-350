@@ -9,7 +9,7 @@ using namespace std;
 class GameOfLife{
 public:
   GameOfLife();//default constructor
-  GameOfLife(int width, int length, int popDen); // overloaded constructor
+  GameOfLife(); // overloaded constructor
   GameOfLife(string fileInput);
   ~GameOfLife();//deconstructor
 
@@ -21,11 +21,7 @@ public:
   int getWidth();
   int getPopDen();
   bool safeInt(int &output);
-  int GetFileInfo();
   char gameBoundary();
-  void Classic();
-  void Mirror();
-  void Doughnut();
   char outputSelection();
   void outputToFile();
   void outputToConsole();
@@ -70,5 +66,48 @@ public:
 
   char *myArrayRow;
   char *myArrayCol;
+
+};
+class GameBoard{
+public:
+  gameBoard();
+  ~gameBoard();
+
+  void getRandomValues();
+  int getFileValues();
+
+  int width;
+  int length;
+
+  char ** arr1 = NULL;
+
+
+};
+
+class Classic{
+public:
+  Classic();
+  ~Classic();
+
+  void startClassic();
+  char ** nextArr = NULL;
+
+
+};
+class Mirror{
+  Mirror();
+  ~Mirror();
+
+  void startMirror();
+  char ** nextArr = NULL;
+
+};
+class Doughnut{
+  Doughnut();
+  Doughnut();
+
+  void startDoughnut();
+  char ** nextArr = NULL;
+
 
 };
