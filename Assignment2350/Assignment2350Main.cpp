@@ -4,6 +4,8 @@
 using namespace std;
 
 int main(int argc, char **argv) {
+  GameBoard *myGame = new GameBoard();
+  myGame->getInputInfo();
   char outputDecision;
   bool validResponse1 = false;
   while(validResponse1 == false){
@@ -21,7 +23,7 @@ int main(int argc, char **argv) {
       bool validResponse = false;
       while(validResponse == false){
         if(tolower(pausesOrEnter) == 'e'){
-          //enter();
+            
           validResponse= true;
           break;
 
@@ -40,7 +42,6 @@ int main(int argc, char **argv) {
       cout << "Not a valid input" << endl;
     }
   }
-  GameOfLife *myGame = new GameOfLife();
   char userResponse;
 
   bool validResponse = false;

@@ -66,15 +66,27 @@ public:
   void getFileValues();
   bool safeInt(int &output);
   void outputToFile();
+  void getInputInfo();
   int width;
   int probOfX;
   int length;
+  int width6;
+  int length6;
+  int userRand6;
   string fileName;
   string textLine;
   ifstream userFile;
+  ifstream userFile2;
+  int neighborCounter;
+
   int RandVar;
   char pausesOrEnter;
-
+  int width1;
+  int length1;
+  int j;
+  int userRand;
+  int widthTemp;
+  int lengthTemp;
 
   char ** arr1 = NULL;
   char ** arr2 = NULL;
@@ -89,9 +101,14 @@ public:
   Classic();
   ~Classic();
 
-  void startClassic();
+  void startClassic(int &length6, int &width6);
   char ** nextArr = NULL;
+  int length6;
+  int width6;
+  int length;
+  int width;
 
+  int neighborCounter;
 
 };
 class Mirror{
@@ -102,6 +119,10 @@ public:
   void startMirror();
   char ** nextArr = NULL;
 
+  int widthTemp;
+  int lengthTemp;
+  int neighborCount;
+
 };
 class Doughnut{
 public:
@@ -110,5 +131,9 @@ public:
 
   void startDoughnut();
   char ** nextArr = NULL;
+
+  int widthTemp;
+  int lengthTemp;
+  int neighborCount;
 
 };
