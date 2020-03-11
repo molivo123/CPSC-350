@@ -87,6 +87,7 @@ void GameBoard::getRandomValues(){
       }
     }
   }
+  return RandBoard;
 }
 
 void GameBoard::getFileValues(){
