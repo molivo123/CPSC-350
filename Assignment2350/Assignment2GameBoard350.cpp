@@ -3,15 +3,18 @@
 
 using namespace std;
 
-
+//constructor
 GameBoard::GameBoard(){
 
 }
 
+//deconstructor
 GameBoard::~GameBoard(){
 
 }
 
+
+//prompts the user for an input file or give values for a random gameboard
 void GameBoard::getInputInfo(){
   char response;
   bool userResponse = false;
@@ -21,10 +24,12 @@ void GameBoard::getInputInfo(){
   while(userResponse == false){
 
     if(tolower(response) == 'r'){
+      //call to randomboard function
       getRandomValues();
       userResponse = true;
     }
     else if (tolower(response) == 'f'){
+      //call to input file info function
       getFileValues();
       userResponse = true;
     }
@@ -34,6 +39,9 @@ void GameBoard::getInputInfo(){
   }
 }
 
+
+
+// checks parameter to make sure it's an integer
 bool GameBoard::safeInt(int &output){
   int temp;
   cin>>temp;
@@ -44,18 +52,25 @@ bool GameBoard::safeInt(int &output){
   }
   output = temp;
   return true;
-
 }
 
+//function for values of randomboard
 void GameBoard::getRandomValues(){
+  int i;
+  int j;
   double randNum = ((double)rand()/(double)RAND_MAX);
+  int length6 = 0;
+  int width6 = 0;
+  userRand6 = 0;
 
   cout << "Enter the width of the Game board: " << endl;
   while (!safeInt(width6)){
     cout << "You have an error. " << endl;
     cout << "Give me the width of the gameboard: " << endl;
   }
+  cout << "Width: " << width6 <<endl;
 
+  widthK = width6;
   cout << "Enter the legnth of the Game board: " << endl;
 
   while (!safeInt(length6)){
@@ -63,72 +78,83 @@ void GameBoard::getRandomValues(){
     cout << "Give me the length of the gameboard: " << endl;
 
   }
+  cout << "Length: " << length6 << endl;
+  lengthK = length6;
+
   cout << "Enter a random number between 1 and 100: " << endl;
 
   while (!safeInt(userRand6)){
     cout << "You have an error. " << endl;
     cout << "Enter a random number between 1 and 100: " << endl;
+    cout << randNum;
 
   }
-
+  randNumUser = (double)(userRand6 * .01);
   RandBoard = new char* [length6];
   for(int i = 0; i < length6; ++i){
     RandBoard[i] = new char [width6];
   }
+  //cout << "Rand NUM: " << randNumUser << endl;
 
-  for (int i = 0; i < width6; ++i){
-    for(int j = 0; j < length6; ++j){
+
+  //couldnt get array to properly output, but can still output x or - depending on randNumUser and randNum
+
+
+  for (int i = 0; i < length6; ++i){
+    for(int j = 0; j < width6; ++j){
+      //cout << randNum << endl;
+      //changes random number each iteration
       randNum = ((double)rand()/(double)RAND_MAX);
-      if(randNum < userRand6){
+      if(randNum < randNumUser){
         RandBoard[i][j] = 'X';
+        cout << RandBoard[i][j] << endl;
       }
       else{
         RandBoard[i][j] = '-';
+        cout << RandBoard[i][j] << endl;
       }
     }
   }
-  return RandBoard;
 }
 
+
+//takes in and reads input file
 void GameBoard::getFileValues(){
-  int c = 0;
-  int LineRow = 0;
-  int LineCol = 0;
+  int lc = 0;
+  int userRand6 = 0;
+  int width6 = 0;
+  int length6 = 0;
   cout << "Please enter your file name: " << endl;
   cin >> fileName;
   userFile.open(fileName);
 
   if(userFile.is_open()){
-    while(getline (userFile, textLine ) ){
-      width+=textLine.length();
-      c++;
+    while(getline (userFile, textLine )){
+      if(textLine.length() > 2){
+        width6=textLine.length();
+        lc++;
+      }
+      else{
+        continue;
+      }
     }
-    length=c;
+    length6=lc;
   }
   else{
     cout << "Cannot find file " << endl;
   }
 
-
-  arr2 = new char *[length];
-  int lineLen = textLine.length();
-
-  for (int i = 0; i < length; ++i){
-    arr2[i] = new char [width];
+  RandBoard2 = new char *[length6];
+  for (int i = 0; i < length6; i++){
+    RandBoard2[i] = new char [width6];
   }
+
+  //tried to set len and width to another var to use in another class, but couldnt get it to work
+  widthK=width6;
+  lengthK=length6;
+
+  cout << "Width file: "<< widthK << endl;
+  cout << "Length file: "<< lengthK << endl;
+
   userFile.close();
-
-  ifstream userFile2(fileName);
-  if(userFile2.is_open()){
-    int j = 0;
-  }
-  while(getline(userFile2, textLine)){
-    for(int i=0; i<width; i++){
-      arr2[j][i]=textLine[i];
-    }
-    j++;
-  }
-  width1=width;
-  length1=length;
-  userFile2.close();
 }

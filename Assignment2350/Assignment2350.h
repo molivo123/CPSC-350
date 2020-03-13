@@ -4,92 +4,53 @@
 #include <random>
 #include <string>
 #include <cmath>
+#include <unistd.h>
+//all of my includes
 
 using namespace std;
+//all of my namespaces
 
+//GoL class
 class GameOfLife{
 public:
   GameOfLife();//default constructor
   ~GameOfLife();//deconstructor
 
-  int *randomBoard();
-  int *chooseFile();
-  void classic();
-  //aux functions
-  char userInput(); // ask user random or file
-  string inputFile(); // ask for name of inputFile
-  int getLength();
-  int getWidth();
-  int getPopDen();
-  char gameBoundary();
-  char outputSelection();
-  void outputToConsole();
-  void pause();
-  void enter();
-  void disp();
-
-  //vars
-  int output;
-  int width=0;
-  int length=0;
-  int popDen;
-  int maxSize;
-  char userResponse1;
-  char userResponse;
-  int randomWidth;
-  int randomLength;
-  int populationDen;
-  double populationDenCalc;
-  int intLine;
-  int intLineRow;
-  int intLineCol;
-  int counter;
-  char tempChar;
-  string userBoundary;
-  int xCounter;
-  char outputDecision;
-  ofstream outputFile;
-  double probOfX;
-  char pausesOrEnter;
-
-
-  char *myArrayRow;
-  char *myArrayCol;
-
 };
+
+//class that is supposed to take in the parameters from either the user or the input to create an array
 class GameBoard{
 public:
-  GameBoard();
-  ~GameBoard();
+  GameBoard();//constructor
+  ~GameBoard();//deconstructor
 
+  //functions/methods
   void getRandomValues();
   void getFileValues();
   bool safeInt(int &output);
   void outputToFile();
   void getInputInfo();
-  int width;
-  int probOfX;
-  int length;
+
+  //vars
+  int lengthK;
+  int widthK;
   int width6;
   int length6;
+  int probOfX;
+  int i;
   int userRand6;
   string fileName;
   string textLine;
   ifstream userFile;
-  ifstream userFile2;
   int neighborCounter;
-
+  double randNumUser;
   int RandVar;
   char pausesOrEnter;
-  int width1;
-  int length1;
   int j;
   int userRand;
-  int widthTemp;
-  int lengthTemp;
 
-  char ** arr1 = NULL;
-  char ** arr2 = NULL;
+
+  char ** RandBoard2 = NULL;
   char ** RandBoard = NULL;
 
 
@@ -98,42 +59,48 @@ public:
 //idea provided to me by the tutoring center
 class Classic{
 public:
-  Classic();
-  ~Classic();
+  Classic();//constructor
+  ~Classic();//deconstructor
 
-  void startClassic(int &length6, int &width6);
-  char ** nextArr = NULL;
-  int length6;
-  int width6;
-  int length;
+  //functions/methods
+  void startClassic();
+
+  //vars
   int width;
-
+  int length;
   int neighborCounter;
+
+  char ** tempArr = NULL;
+
 
 };
 class Mirror{
 public:
-  Mirror();
-  ~Mirror();
+  Mirror();//constructor
+  ~Mirror();//deconstructor
 
+  //functions/methods
   void startMirror();
-  char ** nextArr = NULL;
 
-  int widthTemp;
-  int lengthTemp;
+  //vars
   int neighborCount;
+
+  char ** tempArr = NULL;
+
 
 };
 class Doughnut{
 public:
-  Doughnut();
-  ~Doughnut();
+  Doughnut();//constructor
+  ~Doughnut();//deconstructor
 
+  //functions/methods
   void startDoughnut();
-  char ** nextArr = NULL;
 
-  int widthTemp;
-  int lengthTemp;
+  //vars
   int neighborCount;
+
+  char ** tempArr = NULL;
+
 
 };

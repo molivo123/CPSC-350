@@ -3,9 +3,12 @@
 
 using namespace std;
 
+//main method
 int main(int argc, char **argv) {
-  GameBoard *myGame = new GameBoard();
-  myGame->getInputInfo();
+  //creates instance of gameboard
+  GameBoard *myBoard = new GameBoard();
+  //starts the program
+  myBoard->getInputInfo();
   char outputDecision;
   bool validResponse1 = false;
   while(validResponse1 == false){
@@ -23,8 +26,9 @@ int main(int argc, char **argv) {
       bool validResponse = false;
       while(validResponse == false){
         if(tolower(pausesOrEnter) == 'e'){
-            
+
           validResponse= true;
+          //enter();
           break;
 
         }
@@ -46,6 +50,8 @@ int main(int argc, char **argv) {
 
   bool validResponse = false;
   while(validResponse == false){
+    //prompt to select which game board bounds you would like
+    //none actually work and only classic has progress
     cout << "Which game mode would you like?" << endl;
     cout << "Enter 'C' for Classic" << endl;
     cout << "Enter 'M' for Mirror" << endl;
@@ -71,7 +77,8 @@ int main(int argc, char **argv) {
     }
   }
 
-  delete myGame;
+  delete myBoard;
+  //delete instance
 
   return 0;
 }
