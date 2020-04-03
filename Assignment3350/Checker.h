@@ -20,7 +20,6 @@ public:
 
 
   string textLine;
-  //string fileName = "/Users/matthew/Documents/CPSC_Courses/CPSC-350/Assignment3350/testText.txt";
   char poppedChar;
   char poppedChar2;
   string fileName;

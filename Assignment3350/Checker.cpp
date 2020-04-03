@@ -11,19 +11,10 @@ Checker::~Checker(){
 }
 
 string Checker::getFileName(){
-  cout << "Give me the name of the file you want to check: " << endl;
-  cin >> fileName;
-
-  return fileName;
-}
-
-void Checker::goToStack(){
   numOfDelims(fileName);
 }
 
-
 void Checker::numOfDelims(string fileName){
-  cout << "Got here" << endl;
   checkFile = fileName;
   char tempChar;
   int parenthesis1=0;
@@ -57,7 +48,7 @@ void Checker::numOfDelims(string fileName){
               stack.DoubleSize();
             }
             stack.push(tempChar);
-            cout << tempChar << endl;
+            //cout << tempChar << endl;
 
 
             if(tempChar == '{'){
@@ -82,12 +73,12 @@ void Checker::numOfDelims(string fileName){
         }
       }
     }
-    cout << bracket1 << endl;
-    cout << bracket2 << endl;
-    cout << brace1 << endl;
-    cout << brace2 << endl;
-    cout << parenthesis1 << endl;
-    cout << parenthesis2 << endl;
+    cout << bracket1 << ' ' <<'[' << endl;
+    cout << bracket2 << ' ' << ']' << endl;
+    cout << brace1 << ' ' << '{' << endl;
+    cout << brace2 << ' ' << '}' << endl;
+    cout << parenthesis1 << ' ' << '(' << endl;
+    cout << parenthesis2 << ' ' << ')' << endl;
 
     if(bracket1 > bracket2){
       cout << "Missing a: ']' " << endl;
@@ -162,6 +153,12 @@ void Checker::numOfDelims(string fileName){
       }
       cout << "Line: " << docLine << " Need a '(' before a ')'" << endl;
     }
+    else{
+      cout << "No syntax errors involving '(','{', or '['" <<endl;
+    }
+  }
+  else{
+    cout << "Could not open the file" <<endl;
   }
   userFile.close();
 }
