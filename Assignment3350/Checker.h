@@ -17,8 +17,6 @@ public:
   string getFileName();
   void goToStack();
 
-
-
   string textLine;
   char poppedChar;
   char poppedChar2;
