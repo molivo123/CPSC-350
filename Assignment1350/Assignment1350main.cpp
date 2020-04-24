@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
       cout << "What is the name of the file you want to read? " << endl;
       cin >> fileName;
       textfile.open(fileName);
-      fout.open("testoutput.txt", ios::app);//append mode
+      fout.open(fileName, ios::app);//append mode
       //opens file
 
       //makes user files open
