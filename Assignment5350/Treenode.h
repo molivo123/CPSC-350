@@ -7,7 +7,6 @@ public:
   //TreeNode(int k, <type> value)
   ~TreeNode();
   //when working with template classes
-  virtual ~TreeNode(); // research what "virtual" key word means
 
   T key;
   TreeNode *left;
@@ -17,7 +16,7 @@ public:
 template <typename T>
 
 //tree implementation
-TreeNode::TreeNode(){
+TreeNode<T>::TreeNode(){
   key = 0;
   left = NULL;
   right = NULL;
@@ -25,7 +24,7 @@ TreeNode::TreeNode(){
 
 template <typename T>
 
-TreeNode::TreeNode(T k){
+TreeNode<T>::TreeNode(T k){
   key = k;
   left = NULL;
   right = NULL;
@@ -34,5 +33,5 @@ TreeNode::TreeNode(T k){
 
 template <typename T>
 //leave destructor to us
-TreeNode::~TreeNode(){
+TreeNode<T>::~TreeNode(){
 }

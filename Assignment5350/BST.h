@@ -17,35 +17,33 @@ public:
   bool deleteNode(T value);
 
   bool isEmpty();
-  TreeNode* getMin();
-  TreeNode* getMax();
+  TreeNode<T>* getMin();
+  TreeNode<T>* getMax();
 
-  TreeNode* getSuccessor(TreeNode<T> *d);
+  TreeNode<T>* getSuccessor(TreeNode<T> *d);
 
-  void printTree(TreeNode *node);
+  void printTree(TreeNode<T> *node);
 
-
-private:
-  TreeNode *root;
+  TreeNode<T> *root;
 
 };
 
 template <typename T>
 
-BST::BST(){
-  root = NULL:
+BST<T>::BST(){
+  root = NULL;
 
 }
 
 template <typename T>
 
-BST::~BST(){
+BST<T>::~BST(){
   //makin us do this ourselves
 }
 
 template <typename T>
 
-void BST::printTree(TreeNode *node){
+void BST<T>::printTree(TreeNode<T> *node){
   if(node==NULL){
     return;
   }
@@ -57,8 +55,8 @@ void BST::printTree(TreeNode *node){
 
 template <typename T>
 
-TreeNode* BST::getMax(){
-  TreeNode *curr = root//start at root
+TreeNode<T>* BST<T>::getMax(){
+  TreeNode<T> *curr = root;//start at root
 
   if(root == NULL){
     return NULL; // tree is empty
@@ -71,8 +69,8 @@ TreeNode* BST::getMax(){
 
 
 template <typename T>
-TreeNode* BST::getMin(){
-  TreeNode *curr = root//start at root
+TreeNode<T>* BST<T>::getMin(){
+  TreeNode<T> *curr = root;//start at root
 
   if(root == NULL){
     return NULL; // tree is empty
@@ -85,15 +83,15 @@ TreeNode* BST::getMin(){
 
 template <typename T>
 
-bool BST::isEmpty(){
+bool BST<T>::isEmpty(){
   return (root == NULL);
 }
 
 template <typename T>
 
-void BST::insert(int value){
+void BST<T>::insert(T value){
 
-  TreeNode *node = new TreeNode(value); // value is also the key
+  TreeNode<T> *node = new TreeNode<T>(value); // value is also the key
 
   if(root == NULL){
     // we have an empty Tree
@@ -101,8 +99,8 @@ void BST::insert(int value){
   }
   else{
     //tree is not empty, need to find location
-    TreeNode *curr = root;
-    TreeNode *parent; //empty node
+    TreeNode<T> *curr = root;
+    TreeNode<T> *parent; //empty node
 
     while(true){
       //let's find the insertion point
@@ -129,16 +127,16 @@ void BST::insert(int value){
 
 template <typename T>
 
-bool BST::searchNode(int value){
+bool BST<T>::search(T value){
   if(isEmpty()){
     return false;
   }
   else{
     // tree is not empty
-    TreeNode *current = root;
+    TreeNode<T> *current = root;
 
     while(current->key != value){
-      if(value < current->){
+      if(value < current->key){
         current = current->left;
       }
       else{
@@ -155,115 +153,99 @@ bool BST::searchNode(int value){
 
 template <typename T>
 
-bool BST:: deleteNode(int value){
-  if(isEmpty()){
+bool BST<T>::deleteNode(T value){
+  if(root==NULL){
     return false;
   }
-  else if(!search(k)){
-    return false;
-  }
-
-  //tree is not empty and value exists, so look for it
-  TreeNode *current = root;
-  TreeNode *parnet = root;
-  bool isLeft = true;
-  //usual code to find TreeNode
-  //we will also update pointers
-  while(current->key != k){
-    parent = current;
-    if(k < current->key){
-      isLeft = true;
-      current = current->left;
+  TreeNode<T> *current = root;
+  TreeNode<T> *parent=root;
+  bool isLeft=true;
+  //if we make it here, the tree is not empty and now we need to find the node
+  while(current->key != value){
+    parent=current;
+    if(value < current->key){
+      isLeft=true;
+      current=current->left;
     }
     else{
-      isLeft = false;
-      current = current->right;
+      isLeft=false;
+      current=current->right;
     }
-    if(current == NULL){
+    if(current==NULL){
       return false;
     }
-
-    //if we made it here, we found the node, now we proceed to deleteNode
-
-    //no children. leaft node
-    if(current->left == NULL && current->right == NULL){
-      if(current == root){
-        root = NULL;
-      }
-      else if(isLeft){
-        parent->left = NULL;
-      }
-      else{
-        parent->right = NULL;
-      }
+  }
+  //now we found it, now what
+  if(current->left==NULL && current->right == NULL){
+    if(current==root){
+      root=NULL;
+    //  cout<<"Deleted"<<endl;
     }
-    //one child and the child is left
-    else if(current->righr == NULL){
-      //does not have a right child
-      if(current == root){
-        root = current->left;
-      }
-      else if(isLeft){
-        parent->left = current->left;
-      }
-      else{
-        parent->right = current->left;
-      }
-
-    }
-    else if(current->left == NULL){
-      //does not have a right child
-      if(current == root){
-        root = current->right;
-      }
-      else if(isLeft){
-        parent->left = current->right;
-      }
-      else{
-        parent->right = current->right;
-      }
-
+    else if(isLeft){
+      parent->left=NULL;
     }
     else{
-      //the node has 2 children
-      TreeNode *successor = getSuccessor(current);
-
-      if(current == root){
-        root = successor;
-      }
-      else if(isLeft){
-        parent->left = successor;
-      }
-      else{
-        parent->right = successor;
-      }
-
-      successor->left = current->left;
-
-      return true;
+      parent->right=NULL;
     }
+  }
+  else if(current->right==NULL){
+    if(current==root){
+      root=current->left;
+    }
+    else if(isLeft){
+      parent->left=current->left;
+    }
+    else{
+      parent->right=current->left;
+    }
+  }
+  else if(current->left==NULL){
+    if(current==root){
+      root=current->right;
+    }
+    else if(isLeft){
+      parent->left=current->right;
+    }
+    else{
+      parent->right=current->right;
+    }
+  }
+  else{
+    //node to be deleted has 2 children
+    TreeNode<T> *successor=getSuccessor(current);
+    if(current==root){
+      root=successor;
+    }
+    else if(isLeft){
+      parent->left=successor;
+    }
+    else{
+      parent->right=successor;
+    }
+    successor->left=current->left;
+  }
+  return true;
 
+}
+
+template <typename T>
+TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d){
+  //d is the node to be deleted
+
+  TreeNode<T> *sp = d;
+  TreeNode<T> *successor = d;
+  TreeNode<T> *current = d->right;
+
+  while(current != NULL){
+    sp = successor;
+    successor = current;
+    current = current->left;
   }
 
-  template <typename T>
-  TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d){
-    //d is the node to be deleted
-
-    TreeNode<T> *sp = d;
-    TreeNode<T> *successor = d;
-    TreeNode<T> *current = d->right;
-
-    while(current != NULL){
-      sp = successor;
-      successor = current;
-      current = current->left;
-    }
-
-    if(successor != d->right){
-      sp->left = successor->right;
-      successor->right = d->right;
-    }
-
-    return successor;
+  if(successor != d->right){
+    sp->left = successor->right;
+    successor->right = d->right;
   }
-};
+
+  return successor;
+}
