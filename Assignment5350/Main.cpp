@@ -1,19 +1,67 @@
-#include "Student.h"
 #include "Faculty.h"
-#include "BST.h"
+#include "MasterStudent.h"
 
 int main(int argc, char** argv){
 
-  Student *jeremy = new Student(2314466, "Jeremy Anderson", "Sophomore", "Data Analytics", 3.4, 111111);
-  Faculty *rene = new Faculty(123456, "Rene German", "Lecturer", "Computer Science");
+  MasterStudent *masterStu = new MasterStudent();
 
-  cout << rene->getName() << endl;
+  bool running = true;
+  int userOption = 0;
 
-  BST *myTree<int> = new BST<int>();
-  for (int i = 0; i <= 100; i = i++){
-    myTree->insert(i);
+  while(running){
+    cout << "Welcome To Database: " << endl;
+    cout << "Enter Number Of Option You Would Like To Select" << endl;
+    cout << "1. Print Students" << endl;
+    cout << "2. Print Faculty" << endl;
+    cout << "7. Enter New Student" << endl;
+    cout << "8. Delete A Student" << endl;
+    cout  << "9. Enter New Faculty" << endl;
+
+    cin >> userOption;
+
+    if(userOption == 1){
+      masterStu->printStudents(masterStu->studentTree->root);
+    }
+
+    if(userOption == 7){
+      int id = 0;
+      string name = "";
+      string grade = "";
+      string major = "";
+      double gpa = 0.0;
+      int advisorID = 0;
+
+      cout << "Enter Student's ID: " << endl;
+      cin >> id;
+
+      cout << "Enter Student's Name: " << endl;
+      cin >> name;
+
+      cout << "Enter Student's Grade: " << endl;
+      cin >> grade;
+
+      cout << "Enter Student's Major: " << endl;
+      cin >> major;
+
+      cout << "Enter Student's GPA: " << endl;
+      cin >> gpa;
+
+      cout << "Enter Student's Advisor's ID: " << endl;
+      cin >> advisorID;
+
+      Student *newStudent = new Student(id, name, grade, major, gpa, advisorID);
+      masterStu->addStudent(newStudent);
+
+    }
+
+    else if(userOption == 8){
+      int id = 0;
+      cout << "Enter ID Of Student To Be Deleted: " << endl;
+      cin >> id;
+      Student *newStudent = new Student();
+      newStudent->setID(id);
+      masterStu->deleteStudent(newStudent);
+
+    }
   }
-
-  myTree->printTree(50);
-
 }
